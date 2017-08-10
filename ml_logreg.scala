@@ -1,4 +1,4 @@
-// :load /home/ldali/blackboard/distrw_logreg/src/ml_logreg.scala
+// :load /home/ldali/wkspace/sparkscripts/ml_logreg.scala
 
 
 import org.apache.spark.ml.classification.LogisticRegression
@@ -8,25 +8,27 @@ import org.apache.spark.mllib.classification.LogisticRegressionWithLBFGS
 import org.apache.spark.mllib.util.MLUtils
 
 val DATA_FILE = "/home/ldali/wkspace/slrn/training_binary.libsvm.gz"
+//val DATA_FILE = "/home/ldali/wkspace/slrn/airline.libsvm.2"
+//val DATA_FILE = "/home/ldali/wkspace/slrn/data2.libsvm.2"
 //val DATA_FILE = "/home/ldali/datasets/kdd2012/kdd12.val"
 //val DATA_FILE = "/home/ldali/okr/tree_embedding/nb/clean/training_scorer.libsvm.gz"
 val LAMBDA_REG = 0.1   // L2 regularization
-val N_ITERATIONS = 10
+val N_ITERATIONS = 20
 
 val data = spark.read.format("libsvm").load(DATA_FILE)
 
-val logreg = new LogisticRegression().setMaxIter(N_ITERATIONS).setRegParam(LAMBDA_REG)
+val logreg = new LogisticRegression().setMaxIter(N_ITERATIONS).setRegParam(LAMBDA_REG).setFitIntercept(true)
 
 val lrModel = logreg.fit(data)
 
 lrModel.summary.objectiveHistory.foreach(println)
 
-val binarySummary = lrModel.summary.asInstanceOf[BinaryLogisticRegressionSummary]
+//val binarySummary = lrModel.summary.asInstanceOf[BinaryLogisticRegressionSummary]
 //binarySummary.roc.show
 
-println(binarySummary.areaUnderROC)
+//println(binarySummary.areaUnderROC)
 
-println(lrModel.intercept)
+//println(lrModel.intercept)
 
 // val data = MLUtils.loadLibSVMFile(sc, DATA_FILE).cache()
 

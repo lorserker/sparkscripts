@@ -1,11 +1,12 @@
-// :load /home/ldali/blackboard/distrw_logreg/src/sparse_logreg.scala
+// :load /home/ldali/wkspace/sparkscripts/sparse_logreg.scala
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.HashPartitioner
 
 
 //val DATA_FILE = "/home/ldali/wkspace/slrn/data2.libsvm"
-val DATA_FILE = "/home/ldali/wkspace/slrn/training_binary.libsvm.gz"
+//val DATA_FILE = "/home/ldali/wkspace/slrn/training_binary.libsvm.gz"
+val DATA_FILE = "/home/ldali/wkspace/slrn/airline.libsvm.2"
 val LEARNING_RATE = 1.0
 val LAMBDA_REG = 0.1   // L2 regularization
 val MEMORY = 0.9  // momentum term (if zero, then regular gradient descent)
